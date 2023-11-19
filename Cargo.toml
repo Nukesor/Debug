@@ -1,0 +1,19 @@
+[package]
+name = "debug"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.74"
+
+# Disabling debug info speeds up builds a bunch,
+[profile.dev]
+debug = false
+
+[profile.dev.package."*"]
+# Without optimizations, dependencies are super slow.
+# Specifically processing-heavy libraries, such as
+# tokio, image, webp, sqlx, etc.
+opt-level = 3
+
+[dependencies]
+anyhow = "1"
+rocket = "0.5"
